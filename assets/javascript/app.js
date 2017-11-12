@@ -65,23 +65,6 @@ $(document).ready(function(){
 				this.currentquestion = null;
 		},
 
-		// function - display answer screen
-			// :correct
-			// :incorrect
-			// :unanswered
-
-		// function - end of game
-		
-		// Function - check guess against correct answer
-			// if qanswered
-				// if match, increment # correct answers
-					// display correct screen with interval
-				// else increment # incorrect answers
-					// display incorrect screen with interval
-			// else incrememnt # unanswered
-					// display you didn't answer screen with interval
-			// at timeout, display next question with new interval
-
 		startTimer: function(){
 			console.log('Timer started');
 			intervalId = setInterval(this.decrement, 1000);
@@ -133,7 +116,7 @@ $(document).ready(function(){
 			$('#right').html('Correct:<br />' + this.numright);
 			$('#wrong').html('Incorrect:<br />' + this.numwrong);
 			$('#unanswered').html('Unanswered:<br />' + this.numnoresponse);
-			var finalscore = (this.numright - this.numwrong - this.numnoresponse) / questions.length * 100;
+			var finalscore = Math.round((questions.length - this.numwrong - this.numnoresponse) / questions.length * 100);
 			$('#finalscore').html('Final Score:<br />' + finalscore + '%');
 			for (var i = 0; i < game.panelarray.length; i++) {
 				$(game.panelarray[i]).hide();
@@ -242,6 +225,7 @@ $(document).ready(function(){
 			switch (this.phase) { // check game phase
 
 				case 'initial': // :initial
+					game.initializeGame();
 					gameobj.startTrivia();
 					gameobj.currentquestion = 0;
 					gameobj.displayQuestion(questions,gameobj.currentquestion);
@@ -272,10 +256,6 @@ $(document).ready(function(){
 			} // end switch
 		}
 	}; // end game object
-
-
-	// initialize game
-	game.initializeGame();
 	
 	// click listener	
 	$(document).click(function(event){
