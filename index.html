@@ -19,17 +19,23 @@
 		</div>
 		<div class="content-wrapper" id="skipnav">
 
-			<div id="intro-panel" class="content-panel" style="display: none;">
-				<div id="decription">
-					<h2>Welcome to Trivia Game!</h2>
-					<p>How much trivia do you know? Play this game to find out.</p>
-					<p>You will have 30 seconds to answer each question.</p>
-					<p>Ready to begin?</p>
-					<button class="clickable">Start Game</button>
+			<div id="intro-panel" class="content-panel" style="display: block;">
+				<div id="description">
+					<div id="description-text">
+						<h2>Welcome to Trivia Game!</h2>
+						<p>How much trivia do you know? Play this game to find out.</p>
+						<p>You will have 30 seconds to answer each question.</p>
+						<p>Ready to begin?</p>
+					</div>
+					<div id="right" class="one-third"></div>
+					<div id="wrong" class="one-third"></div>
+					<div id="unanswered" class="one-third"></div>
+					<div id="finalscore" class="full"></div>
+					<button id="start" class="clickable">Start Game</button>
 				</div>
 			</div>
 
-			<div id="question-panel" class="content-panel" style="display: block;">
+			<div id="question-panel" class="content-panel" style="display: none;">
 				<div id="question-image" class="thumbnail">
 					<img src="https://placehold.it/640x480" />
 				</div>
@@ -40,29 +46,26 @@
 			
 			<div class="two-col">
 				<div id="timer-panel" class="col text-center">
-					<div id="timer" style="display: block;">
+					<div id="timer" style="display: none;">
 						<div id="timer-text">
 							Time Remaining
 						</div>
 						<div id="timer-numbers" class="large-text">
-							30
+							&mdash;
 						</div>
 					</div>
 				</div>
 				<div id="results-panel" class="col text-center">
-					<div id="results-text" style="display: block;">
-							<i class="fa fa-check-circle fa-lg large-text" aria-hidden="true"></i>
-							<br />
-							Correct!
+					<div id="results-text" style="display: none;">
 					</div>
 				</div>
 			</div>
-			<div id="answer-panel" class="content-panel" style="display: block;">
+			<div id="answer-panel" class="content-panel" style="display: none;">
 				<div id="options" class="button-group">
-					<button>Answer 1</button>
-					<button>Answer 2</button>
-					<button>Answer 3</button>
-					<button>Answer 4</button>
+					<button class="clickable">Answer 1</button>
+					<button class="clickable">Answer 2</button>
+					<button class="clickable">Answer 3</button>
+					<button class="clickable">Answer 4</button>
 				</div>
 			</div>
 
@@ -75,6 +78,6 @@
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="assets/app.js" type="text/javascript"></script>
+	<script src="assets/javascript/app.js" type="text/javascript"></script>
 </body>
 </html>

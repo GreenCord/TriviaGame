@@ -178,6 +178,25 @@ html {
 		display: block;
 	}
 
+	.one-third {
+		display: inline-block;
+		margin-right: 3%;
+		padding: 1rem;
+		text-align: center;
+		width: 30%;
+	}
+
+	.one-third.last {
+		margin-right: 0;
+	}
+
+	.full {
+		font-size: 5rem;
+		line-height: 1;
+		padding: 1rem;
+		text-align: center;
+	}
+
 	.large-text {
 		font-size: 3rem;
 		margin: 0;
