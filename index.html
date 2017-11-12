@@ -14,11 +14,58 @@
 	<a class="skip-to-content" href="#skipnav" title="Skip Navigation">Skip to main content</a>
 		<div class="header-wrapper">
 			<header>
-				
+				<h1 class="title">Trivia Game</h1>
 			</header>
 		</div>
 		<div class="content-wrapper" id="skipnav">
+
+			<div id="intro-panel" class="content-panel" style="display: none;">
+				<div id="decription">
+					<h2>Welcome to Trivia Game!</h2>
+					<p>How much trivia do you know? Play this game to find out.</p>
+					<p>You will have 30 seconds to answer each question.</p>
+					<p>Ready to begin?</p>
+					<button class="clickable">Start Game</button>
+				</div>
+			</div>
+
+			<div id="question-panel" class="content-panel" style="display: block;">
+				<div id="question-image" class="thumbnail">
+					<img src="https://placehold.it/640x480" />
+				</div>
+				<div id="question" class="question">
+					<h2 class="title">Can you answer this question? It is really easy. The answer is right here, you just have to figure out which one it is.</h2>
+				</div>
+			</div>
 			
+			<div class="two-col">
+				<div id="timer-panel" class="col text-center">
+					<div id="timer" style="display: block;">
+						<div id="timer-text">
+							Time Remaining
+						</div>
+						<div id="timer-numbers" class="large-text">
+							30
+						</div>
+					</div>
+				</div>
+				<div id="results-panel" class="col text-center">
+					<div id="results-text" style="display: block;">
+							<i class="fa fa-check-circle fa-lg large-text" aria-hidden="true"></i>
+							<br />
+							Correct!
+					</div>
+				</div>
+			</div>
+			<div id="answer-panel" class="content-panel" style="display: block;">
+				<div id="options" class="button-group">
+					<button>Answer 1</button>
+					<button>Answer 2</button>
+					<button>Answer 3</button>
+					<button>Answer 4</button>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	<div class="footer-wrapper">

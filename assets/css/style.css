@@ -22,18 +22,18 @@ html {
 	h1, h2, h3, h4, h5, h6, label {
 		color: #0c1200;
 		font-family: Nunito, Calibri, Verdana, Geneva, sans-serif;
-		font-weight: 700;
+		font-weight: 600;
 		line-height: 1.1;
 	}
 
-	form input[type="text"], form input[type="email"], form textarea, form input[type="submit"] {
+	form input[type="text"], form input[type="email"], form textarea, form input[type="submit"], button {
 		font-family: 'Open Sans', Corbel, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 		font-size: 1rem;
 	}
 
 	p, code, blockquote {  
 		color: #17160a;
-		margin: 0 0 1.5rem;
+		margin: 0 0 3rem;
 	}
 
 	p {
@@ -43,7 +43,6 @@ html {
 
 	p+p { 
 		margin-top: -1.5rem; 
-		text-indent: 2rem;
 	}
 
 	code,
@@ -65,12 +64,12 @@ html {
 	}
 
 
-	h1 { font-size: 3rem;		line-height: 1;		margin-bottom: 2.0rem; 		}
-	h2 { font-size: 2rem;		line-height: 1.1; 	margin-bottom: 1.33333rem;	}
-	h3 { font-size: 1.5rem;		line-height: 1.1;	margin-bottom: 1.0rem; 		}
-	h4 { font-size: 1.25rem;	line-height: 1.1;	margin-bottom: 0.83333rem; 	}
-	h5 { font-size: 1.125rem;	line-height: 1.1; 	margin-bottom: 0.75rem; 	}
-	h6 { font-size: 1rem;		line-height: 1.1;	margin-bottom: 0.66667rem	}
+	h1 { font-size: 2.000rem;	line-height: 1.0;	margin-bottom: 1.33333rem;	}
+	h2 { font-size: 1.625rem;	line-height: 1.1; margin-bottom: 1.08333rem;	}
+	h3 { font-size: 1.375rem;	line-height: 1.1;	margin-bottom: 0.91667rem;	}
+	h4 { font-size: 1.125rem;	line-height: 1.1;	margin-bottom: 0.75000rem; 	}
+	h5 { font-size: 1.125rem;	line-height: 1.1; margin-bottom: 0.75000rem;	}
+	h6 { font-size: 1.000rem; line-height: 1.1; margin-bottom: 0.66667rem;	}
 
 	a { 
 		border: 1px solid transparent;
@@ -110,6 +109,10 @@ html {
     height: 1px;
 	 }
 
+	 .title {
+	 	margin: 0;
+	 }
+
 	/* Accessible Skip to Content */
 	.skip-to-content {
 		height:1px;
@@ -134,15 +137,81 @@ html {
 
 	/* Main wrapper - contains all content except footer. Flexed to push footer to bottom in modern browsers */
 	.main-wrapper {
-		flex: 1 0 auto; 
+		display: flex;
+		flex: 1 0 auto;
+		flex-direction: column;
 		margin: 0; 
 		padding: 0;
 		width: 100%; 		
 	}
 	/* End main wrapper */
 
+	/* Header Wrapper */
+	.header-wrapper {
+		background: tomato;
+		padding: 1rem;
+	}	
 
-	
+	.header-wrapper header {
+		background: white;
+		margin: 0 auto;
+		max-width: 960px;
+		padding: 1rem;
+		text-align: center;
+	}
+
+	/* Content Wrapper */
+	.content-wrapper {
+		background: darkred;
+		flex: 1 0 auto; 
+		padding: 1rem;
+	}
+
+	.content-panel, .two-col {
+		background: lime;
+		margin: 0 auto;
+		max-width: 960px;
+		padding: 1rem;
+	}
+
+	.two-col .col {
+		display: block;
+	}
+
+	.large-text {
+		font-size: 3rem;
+		margin: 0;
+	}
+
+	.text-center {
+		text-align: center;
+	}
+
+	.content-panel button {
+		display: block;
+		padding: 1rem;
+		width: 100%;
+	}
+
+	.thumbnail img {
+		display: block;
+		height: auto;
+		margin: 0 auto;
+		max-width: 640px;
+		width: 100%;
+	}
+
+	.thumbnail {
+		margin-bottom: 0.66667rem;
+	}
+
+	.button-group button {
+		margin-bottom: 0.66667rem;
+	}
+
+	.button-group button:last-of-type {
+		margin-bottom: 0;
+	}
 
 	/* Footer wrapper - contains footer content */
 	.footer-wrapper {
@@ -161,11 +230,17 @@ html {
 }
 
 @media only screen and (min-width: 480px) {
-	
+	.two-col .col {
+		display: inline-block;
+		vertical-align: middle;
+		width: 49%;
+	}
 }
 
 @media only screen and (min-width: 640px) {
-	
+	h1 { font-size: 2.500rem;	line-height: 1.0;	margin-bottom: 1.66667rem;	}
+	h2 { font-size: 2.000rem;	line-height: 1.1; margin-bottom: 1.33333rem;	}
+	h3 { font-size: 1.500rem;	line-height: 1.1;	margin-bottom: 1.00000rem;	}
 }
 
 @media only screen and (min-width: 768px) {
@@ -177,7 +252,9 @@ html {
 }
 
 @media only screen and (min-width: 1280px) {
-	
+	h1 { font-size: 3.000rem;	line-height: 1.0;	margin-bottom: 2.00000rem;	}
+	h2 { font-size: 2.250rem;	line-height: 1.1; margin-bottom: 1.50000rem;	}
+	h3 { font-size: 1.750rem;	line-height: 1.1;	margin-bottom: 1.16667rem;	}
 }
 
 @media only screen and (min-width: 1600px) {
