@@ -5,16 +5,25 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://use.fontawesome.com/f12d97369d.js"></script> <!--FontAwesome Icons-->
-	<link href="https://fonts.googleapis.com/css?family=Nunito:600|Open+Sans:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,900" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
 	<div class="main-wrapper">
 	<a class="skip-to-content" href="#skipnav" title="Skip Navigation">Skip to main content</a>
+		<div class="vid-wrapper">
+			<video loop muted autoplay poster="assets/images/snow_640x360.jpg" class="fullscreen-bg__video">
+				<source src="assets/video/snow_640x360.webm" type="video/webm">
+				<source src="assets/video/snow_640x360.mp4" type="video/mp4">
+				<source src="assets/video/snow_640x360.ogv" type="video/ogg">
+			</video>
+		</div>
+
+
 		<div class="header-wrapper">
 			<header>
-				<h1 class="title">Trivia Game</h1>
+				<h1 class="title">Christmas Movie Trivia</h1>
 			</header>
 		</div>
 		<div class="content-wrapper" id="skipnav">
@@ -22,9 +31,9 @@
 			<div id="intro-panel" class="content-panel" style="display: block;">
 				<div id="description">
 					<div id="description-text">
-						<h2>Welcome to Trivia Game!</h2>
-						<p>How much trivia do you know? Play this game to find out.</p>
-						<p>You will have 30 seconds to answer each question.</p>
+						<h2>How much do you really know about Christmas?</h2>
+						<p>It's the most wonderful time of the year. How many of these questions about Christmas can you answer correctly?</p>
+						<p>You will have 30 seconds to answer each question. Good luck!</p>
 						<p>Ready to begin?</p>
 					</div>
 					<div id="right" class="one-third"></div>
@@ -45,7 +54,7 @@
 			</div>
 			
 			<div class="two-col">
-				<div id="timer-panel" class="col text-center">
+				<div id="timer-panel" class="col text-center" style="display: none;">
 					<div id="timer" style="display: none;">
 						<div id="timer-text">
 							Time Remaining
@@ -55,7 +64,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="results-panel" class="col text-center">
+				<div id="results-panel" class="col text-center" style="display: none;">
 					<div id="results-text" style="display: none;">
 					</div>
 				</div>

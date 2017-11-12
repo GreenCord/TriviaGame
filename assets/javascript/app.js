@@ -5,21 +5,45 @@ $(document).ready(function(){
 	var questions = [
 		// Format: Question, Correct Answer, Incorrect Answer 1, Incorrect Answer 2, Incorrect Answer 3, image
 		[
-			'Question Number 1?',
-			'Correct Answer',
-			'Incorrect Answer 1',
-			'Incorrect Answer 2',
-			'Incorrect Answer 3',
+			'What is the most iconic Christmas movie?',
+			'Die Hard',
+			'A Christmas Story',
+			'It\'s a Wonderful Life',
+			'Miracle on 34th Street',
 			'<img src="https://placehold.it/640x480" alt="placeholder" />'
 		],
 		[
-			'Question Number 2?',
-			'Correct Answer',
-			'Incorrect Answer 1',
-			'Incorrect Answer 2',
-			'Incorrect Answer 3',
+			'If you get a mogwai for Christmas, which of the following rules can you break?',
+			'Let it watch TV before noon.',
+			'Keep it out of sunlight.',
+			'Don\'t let it take a bath.',
+			'Give it some fried chicken after midnight.',
 			'<img src="https://placehold.it/640x480" alt="placeholder" />'
 		],
+		[
+			'Which of the following is the coup de grace of all dares?',
+			'Triple Dog Dare',
+			'Triple Dare',
+			'Double Dog Dare',
+			'Double Dare',
+			'<img src="https://placehold.it/640x480" alt="placeholder" />'
+		],
+		[
+			'Frank Cross was the main character in this movie.',
+			'Scrooged',
+			'It\'s a Wonderful Life',
+			'Die Hard',
+			'National Lampoon\'s Christmas Vacation',
+			'<img src="https://placehold.it/640x480" alt="placeholder" />'
+		],
+		[
+			'Complete this quote: "Oh, the silent majesty of a winter\'s morn... the clean, cool chill of the holiday air...',
+			'An a*****le in his bathrobe, emptying a chemical toilet into my sewer...',
+			'And every time a bell rings, an angel gets his wings.',
+			'Christmas was on its way. Lovely, glorious, beautiful Christmas, upon which the entire kid year revolved.',
+			'Christmas isn\'t just a day, it\'s a frame of mind.',
+			'<img src="https://placehold.it/640x480" alt="placeholder" />'
+		]
 	];
 
 
@@ -42,9 +66,9 @@ $(document).ready(function(){
 		timerDefault: 30,
 		delayDefault: 5,
 		currentquestion: null,
-		ansright: '<i class="fa fa-check-circle fa-lg large-text" aria-hidden="true"></i><br />Correct!',
-		answrong: '<i class="fa fa-times-circle fa-lg large-text" aria-hidden="true"></i><br />Incorrect!',
-		ansnone: '<i class="fa fa-question-circle fa-lg large-text" aria-hidden="true"></i><br />You were stumped.',
+		ansright: '<i class="fa fa-check-circle fa-lg large-text correct" aria-hidden="true"></i><br />Correct!',
+		answrong: '<i class="fa fa-times-circle fa-lg large-text incorrect" aria-hidden="true"></i><br />Incorrect!',
+		ansnone: '<i class="fa fa-question-circle fa-lg large-text stumped" aria-hidden="true"></i><br />You were stumped.',
 		panelarray: ['#question-panel', '#timer-panel', '#timer', '#results-panel', '#answer-panel', '#results-text'],
 
 

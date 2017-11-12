@@ -10,7 +10,7 @@ html {
 	/* Screen styles only - separate from print styles */
 	
 	html, body {
-		font: 100%/1.5 'Open Sans', Corbel, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+		font: 100%/1.5 Montserrat, Corbel, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 		height: 100%;
 	}
 
@@ -21,13 +21,13 @@ html {
 
 	h1, h2, h3, h4, h5, h6, label {
 		color: #0c1200;
-		font-family: Nunito, Calibri, Verdana, Geneva, sans-serif;
-		font-weight: 600;
+		font-family: Montserrat, Calibri, Verdana, Geneva, sans-serif;
+		font-weight: 900;
 		line-height: 1.1;
 	}
 
 	form input[type="text"], form input[type="email"], form textarea, form input[type="submit"], button {
-		font-family: 'Open Sans', Corbel, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+		font-family: Montserrat, Corbel, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 		font-size: 1rem;
 	}
 
@@ -43,6 +43,10 @@ html {
 
 	p+p { 
 		margin-top: -1.5rem; 
+	}
+
+	p:last-of-type {
+		margin-bottom: 0;
 	}
 
 	code,
@@ -111,6 +115,7 @@ html {
 
 	 .title {
 	 	margin: 0;
+	 	text-transform: uppercase;
 	 }
 
 	/* Accessible Skip to Content */
@@ -146,14 +151,48 @@ html {
 	}
 	/* End main wrapper */
 
+	/* Video Background */
+	.vid-wrapper {
+		bottom: 0;
+		left: 0;
+		overflow: hidden;
+		position: fixed;
+		right: 0;
+		top: 0;
+		z-index: -100;
+	}
+
+	.fullscreen-bg__video {
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	@media (min-aspect-ratio: 16/9) {
+	  .fullscreen-bg__video {
+	  	height: auto;
+	  	width: 100%;
+	  }
+	}
+
+	@media (max-aspect-ratio: 16/9) {
+	  .fullscreen-bg__video {
+	    height: 100%;
+	    width: auto;
+	  }
+	}
+
 	/* Header Wrapper */
 	.header-wrapper {
-		background: tomato;
+		background: rgb(255,255,255);
+		background: rgba(255,255,255,0.33);
+		margin-bottom: 1rem;
 		padding: 1rem;
 	}	
 
 	.header-wrapper header {
-		background: white;
 		margin: 0 auto;
 		max-width: 960px;
 		padding: 1rem;
@@ -162,13 +201,13 @@ html {
 
 	/* Content Wrapper */
 	.content-wrapper {
-		background: darkred;
 		flex: 1 0 auto; 
 		padding: 1rem;
 	}
 
 	.content-panel, .two-col {
-		background: lime;
+		background: rgb(255,255,255);
+		background: rgba(255,255,255,0.67);
 		margin: 0 auto;
 		max-width: 960px;
 		padding: 1rem;
@@ -224,6 +263,10 @@ html {
 		margin-bottom: 0.66667rem;
 	}
 
+	.correct { color: #0a0; }
+	.incorrect { color: #c00; }
+	.stumped { color: #00c; }
+
 	.button-group button {
 		margin-bottom: 0.66667rem;
 	}
@@ -234,7 +277,9 @@ html {
 
 	/* Footer wrapper - contains footer content */
 	.footer-wrapper {
-		padding: 0.75rem;
+		background: rgb(255,255,255);
+		background: rgba(255,255,255,0.33);
+		padding: 1rem;
 		text-align: center;
 	}
 
