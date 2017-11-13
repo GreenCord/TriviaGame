@@ -1,24 +1,48 @@
-$(document).ready(function(){
+var bgm = new Audio('./assets/audio/dotspf.ogg');
+bgm.addEventListener('ended', function(){
+	this.currentTime = 0;
+	this.play();
+}, false);
 
+$(document).ready(function(){
+	bgm.play();
 // create trivia questions and answers array
 	// nested array - [question, correct answer]
 	var questions = [
-		// Format: Question, Correct Answer, Incorrect Answer 1, Incorrect Answer 2, Incorrect Answer 3, image
+		// Format: 
+		// 0 - Question, 
+		// 1 - Correct Answer, 
+		// 2 - Incorrect Answer 1,
+		// 3 - Incorrect Answer 2, 
+		// 4 - Incorrect Answer 3, 
+		// 5 - intro image
+		// 6 - correct image
+		// 7 - incorrect image
+		// 8 - correct text
+		// 9 - incorrect text
 		[
 			'What is the most iconic Christmas movie?',
 			'Die Hard',
 			'A Christmas Story',
 			'It\'s a Wonderful Life',
 			'Miracle on 34th Street',
-			'<img src="https://placehold.it/640x480" alt="placeholder" />'
+			'<img src="./assets/images/gift.jpg" alt="Answer the question to open the gift!" />',
+			'<img src="./assets/images/diehard_right.gif" alt="Got invited to the Christmas party by mistake. Who knew?" />',
+			'<img src="./assets/images/diehard_wrong.gif" alt="John McClane is judging you." />',
+			'Yippy-ki-yay.',
+			'John McClane is judging you.'
 		],
 		[
-			'If you get a mogwai for Christmas, which of the following rules can you break?',
-			'Let it watch TV before noon.',
-			'Keep it out of sunlight.',
-			'Don\'t let it take a bath.',
-			'Give it some fried chicken after midnight.',
-			'<img src="https://placehold.it/640x480" alt="placeholder" />'
+			'If you get a mogwai for Christmas, which of the following should you do?',
+			'Let him watch TV before noon.',
+			'Take him sunbathing.',
+			'Give him a bath.',
+			'Eat some fried chicken with him after midnight.',
+			'<img src="./assets/images/gift.jpg" alt="Answer the question to open the gift!" />',
+			'<img src="./assets/images/gizmo_right.gif" alt="Gizmo dances. You know all about mogwai care!" />',
+			'<img src="./assets/images/gizmo_wrong.gif" alt="Gremlins everywhere. Welp, there goes the neighborhood." />',
+			'Yeah! You know all about mogwai care.',
+			'Welp, there goes the neighborhood.'
 		],
 		[
 			'Which of the following is the coup de grace of all dares?',
@@ -26,7 +50,11 @@ $(document).ready(function(){
 			'Triple Dare',
 			'Double Dog Dare',
 			'Double Dare',
-			'<img src="https://placehold.it/640x480" alt="placeholder" />'
+			'<img src="./assets/images/gift.jpg" alt="Answer the question to open the gift!" />',
+			'<img src="./assets/images/tripledog_right.gif" alt="Maybe you shouldn\'t have gotten that one right. Now you gotta stick your tongue to a pole." />',
+			'<img src="./assets/images/tripledog_wrong.gif" alt="Ohhhhh fuuuuuudggggeeeee... you fudged that one up. Wash your mouth out with soap!" />',
+			'Hmmm..maybe you shouldn\'t have gotten that one right....',
+			'Ohhhhhhhh fuuuuuuudggeeeee...'
 		],
 		[
 			'Frank Cross was the main character in this movie.',
@@ -34,7 +62,11 @@ $(document).ready(function(){
 			'It\'s a Wonderful Life',
 			'Die Hard',
 			'National Lampoon\'s Christmas Vacation',
-			'<img src="https://placehold.it/640x480" alt="placeholder" />'
+			'<img src="./assets/images/gift.jpg" alt="Answer the question to open the gift!" />',
+			'<img src="./assets/images/scrooged_right.gif" alt="Yep. Frank Cross is in Scrooged. And he\'s not all that happy about it." />',
+			'<img src="./assets/images/scrooged_wrong.gif" alt="How could you get that wrong? Does that suck?!" />',
+			'Frank Cross is going to have a weird day.',
+			'Frank Cross is judging you.'
 		],
 		[
 			'Complete this quote: "Oh, the silent majesty of a winter\'s morn... the clean, cool chill of the holiday air...',
@@ -42,7 +74,11 @@ $(document).ready(function(){
 			'And every time a bell rings, an angel gets his wings.',
 			'Christmas was on its way. Lovely, glorious, beautiful Christmas, upon which the entire kid year revolved.',
 			'Christmas isn\'t just a day, it\'s a frame of mind.',
-			'<img src="https://placehold.it/640x480" alt="placeholder" />'
+			'<img src="./assets/images/gift.jpg" alt="Answer the question to open the gift!" />',
+			'<img src="./assets/images/vaca_right.gif" alt="Merry Christmas! Shitter was full." />',
+			'<img src="./assets/images/vaca_wrong.gif" alt="Clark Griswold is judging you. And has a headache." />',
+			'Oh, Cousin Eddie.',
+			'Clark Griswold is judging you. And has a headache.'
 		]
 	];
 
@@ -64,7 +100,7 @@ $(document).ready(function(){
 		intervalId: null,
 		timer: null,
 		timerDefault: 30,
-		delayDefault: 5,
+		delayDefault: 10,
 		currentquestion: null,
 		ansright: '<i class="fa fa-check-circle fa-lg large-text correct" aria-hidden="true"></i><br />Correct!',
 		answrong: '<i class="fa fa-times-circle fa-lg large-text incorrect" aria-hidden="true"></i><br />Incorrect!',
@@ -73,7 +109,9 @@ $(document).ready(function(){
 
 
 		// audio
-
+		ding: new Audio("./assets/audio/ding.mp3"),
+		buzz: new Audio("./assets/audio/buzz.wav"),
+		stumped: new Audio("./assets/audio/stumped.wav"),
 		// functions
 		
 		// Function - initialize trivia game
@@ -102,7 +140,10 @@ $(document).ready(function(){
 			}
 		},
 
-		
+		playAudio: function(objid){
+			objid.currentTime = 0;
+			objid.play();
+		},
 
 		// Function - Decrement
 		decrement: function(nextFunction){
@@ -188,9 +229,10 @@ $(document).ready(function(){
 				this.timer = this.timerDefault;
 
 				// get and display question
-				$('#question').html('<h2>' + array[index][0] + '</h2>');
+				$('#question').html('<h2>' + array[index][0] + '</h2>').fadeIn();
 				// get and display image
 				$('#question-image').html(array[index][5]);
+				$('#question-comment').html('&mdash;');
 				// get and randomize display of answer options
 				var answers = [];
 				for (var i = 1; i <= 4; i++) {
@@ -202,7 +244,7 @@ $(document).ready(function(){
 					// buttons += '<button class="clickable">' + answers[j] + '</button>';
 					var $button = $('<button></button>', {id: 'button' + j, class: 'clickable', text: answers[j]});
 					$button.data('value', answers[j]);
-					$('#options').append($button);
+					$('#options').append($button).fadeIn();
 				}
 				this.startTimer();
 			} else if (index >= array.length) {
@@ -224,11 +266,19 @@ $(document).ready(function(){
 			console.log('Correct: ' + correct + ' | Answered: ' + answered);
 			if (answered) {
 				if (correct) {
+					this.playAudio(this.ding);
 					$('#results-text').html(this.ansright);
+					$('#question-image').html(questions[game.currentquestion][6]);
+					$('#question-comment').text(questions[game.currentquestion][8]);
 				} else {
+					this.playAudio(this.buzz);
 					$('#results-text').html(this.answrong);
+					$('#question-image').html(questions[game.currentquestion][7]);
+					$('#question-comment').text(questions[game.currentquestion][9]);
+
 				}
 			} else {
+				this.playAudio(this.stumped);
 				$('#results-text').html(this.ansnone);
 			}
 			$('#results-text').fadeIn();
