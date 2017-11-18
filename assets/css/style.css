@@ -31,6 +31,10 @@ html {
 		font-size: 1rem;
 	}
 
+	button {
+		word-wrap: break-word;
+	}
+
 	p, code, blockquote {  
 		color: #17160a;
 		margin: 0 0 3rem;
@@ -206,10 +210,22 @@ html {
 	}
 
 	/* Content Wrapper */
+	.button-only {
+		display: block;
+		padding: 0.5rem;
+		width: 100%;
+	}
+
+	.button-only button {
+		display: block;
+		margin: 0 auto;
+	}
+
 	.content-wrapper {
-		flex: 1 0 auto; 
-		padding: 2rem 1rem 1rem 1rem;
+		background: rgb(255,255,255);
 		background: rgba(255,255,255,0.33);
+		flex: 1 0 auto; 
+		padding: 0 1rem 1rem 1rem;
 	}
 
 	.content-panel, .two-col {
@@ -252,10 +268,33 @@ html {
 		text-align: center;
 	}
 
-	.content-panel button {
+	.content-panel button, .content-panel button:link, .content-panel button:visited {
+		background: #efefef;
+		border: 1px solid #afafaf;
+		color: #0e0e0e;
+		cursor: pointer!important;
 		display: block;
+		height: auto;
 		padding: 1rem;
 		width: 100%;
+
+	}
+	.content-panel button:hover, .content-panel button:focus  {
+		background: #0c0;
+		border: 1px solid #0a0;
+		color: #fefefe;
+	}
+
+	.content-panel button:disabled:hover, .content-panel button:disabled:focus {
+		background: #efefef;
+		border: 1px solid #afafaf;
+		color: #0e0e0e;
+		cursor: initial!important;
+	}
+
+	.content-panel button:active {
+		background: #0a0;
+		border-color: #0c0;
 	}
 
 	.thumbnail img {
@@ -292,7 +331,7 @@ html {
 	}
 
 	.footer-wrapper p {
-		line-height: 1;
+		line-height: 1.5;
 		margin: 0; 
 		padding: 0;
 	}

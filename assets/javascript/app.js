@@ -1,4 +1,6 @@
-var bgm = new Audio('./assets/audio/dotspf.ogg');
+// var bgm = new Audio('./assets/audio/dotspf.ogg');
+var bgm = new Audio('./assets/audio/christmas.ogg');
+var playing = false;
 bgm.addEventListener('ended', function(){
 	this.currentTime = 0;
 	this.play();
@@ -6,6 +8,14 @@ bgm.addEventListener('ended', function(){
 
 $(document).ready(function(){
 	bgm.play();
+
+	function pauseAudio(audio){
+		if (!playing) {
+			audio.pause();
+		} else {
+			audio.play();
+		}
+	}
 // create trivia questions and answers array
 	// nested array - [question, correct answer]
 	var questions = [
@@ -102,6 +112,8 @@ $(document).ready(function(){
 		timerDefault: 30,
 		delayDefault: 10,
 		currentquestion: null,
+		i_ansright: '<i class="fa fa-check-circle correct" aria-hidden="true"></i>&nbsp;',
+		i_answrong: '<i class="fa fa-times-circle incorrect" aria-hidden="true"></i>&nbsp;',
 		ansright: '<i class="fa fa-check-circle fa-lg large-text correct" aria-hidden="true"></i><br />Correct!',
 		answrong: '<i class="fa fa-times-circle fa-lg large-text incorrect" aria-hidden="true"></i><br />Incorrect!',
 		ansnone: '<i class="fa fa-question-circle fa-lg large-text stumped" aria-hidden="true"></i><br />You were stumped.',
@@ -232,7 +244,7 @@ $(document).ready(function(){
 				$('#question').html('<h2>' + array[index][0] + '</h2>').fadeIn();
 				// get and display image
 				$('#question-image').html(array[index][5]);
-				$('#question-comment').html('&mdash;');
+				$('#question-comment').html('Pick an answer to unwrap this thoughtful gift!');
 				// get and randomize display of answer options
 				var answers = [];
 				for (var i = 1; i <= 4; i++) {
@@ -251,6 +263,24 @@ $(document).ready(function(){
 				console.log('Game Over, display results');
 				this.gameOver();
 			}
+		},
+
+		revealAnswers: function($obj){
+			$obj.each(function(){
+				
+				
+				if ($(this).attr('id') != 'start'){
+					console.log('! -- $this',$(this), 'this', this);
+					$(this).attr('disabled','disabled');
+					if($(this).data('value') === questions[game.currentquestion][1]) {
+						$(this).prepend(game.i_ansright);
+					} else {
+						$(this).prepend(game.i_answrong);
+					}
+				}
+				
+				
+			});
 		},
 
 		displayAnswer: function(correct,answered){
@@ -282,6 +312,7 @@ $(document).ready(function(){
 				$('#results-text').html(this.ansnone);
 			}
 			$('#results-text').fadeIn();
+			this.revealAnswers($('.clickable'));
 			this.qanswered = false;
 			this.currentquestion++;
 			this.timer = this.delayDefault;
@@ -339,6 +370,12 @@ $(document).ready(function(){
 			console.log(objid + ' data value: ' + $(objid).data());
 			game.clickHandler(objid);
 		});
+	});
+
+	$('#mute').click(function(event){
+		console.log('mute clicked');
+		pauseAudio(bgm);
+		playing = !playing;
 	});
 
 });
