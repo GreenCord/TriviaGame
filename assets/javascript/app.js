@@ -128,7 +128,6 @@ $(document).ready(function(){
 		stumped: new Audio("./assets/audio/stumped.wav"),
 		// functions
 		
-		// Function - initialize trivia game
 		initializeGame: function() {
 				// reset all counters, reset game phase
 				this.phase = 'initial';
@@ -142,15 +141,13 @@ $(document).ready(function(){
 		},
 
 		startTimer: function(){
-			console.log('Timer started');
 			intervalId = setInterval(this.decrement, 1000);
 		},
 
 		stopTimer: function(){
-			console.log('Timer stopped');
 			clearInterval(intervalId);
-			if (!game.qanswered) {
-				game.checkAnswer();
+			if (!game.qanswered) { 
+				this.checkAnswer();
 			}
 		},
 
@@ -165,27 +162,29 @@ $(document).ready(function(){
 			game.timer--;
 			$("#timer-numbers").text(game.timer);
 			if (game.timer === 0){
+				// time expired
 				game.stopTimer();
 				game.qanswered = false;
-				console.log('Time expired');
+
 				if (game.phase === 'quizzing') {
+					// if the timer was timing a question, increase count of non-responses and display answers
 					game.numnoresponse++;
 					game.displayAnswer(false,game.qanswered);
+
 				} else if (game.phase === 'displaying') {
-					// game.currentquestion++;
+					// if the timer was displaying the answers, then show the next question
 					game.displayQuestion(questions,game.currentquestion);
 				}
-      } // end if
+      }
 		},
 
-		// Function - display question, options
+		
 		startTrivia: function(){
 			switch (this.phase) { // check game phase
 				case 'initial': // :initial phase, display panels
-					console.log('Initial Phase detected, displaying trivia panels');
 					$('#intro-panel').hide();
-					for (var i = 0; i < game.panelarray.length; i++) {
-						$(game.panelarray[i]).fadeIn();
+					for (var i = 0; i < this.panelarray.length; i++) {
+						$(this.panelarray[i]).fadeIn();
 					}
 				break;
 			}
@@ -197,8 +196,8 @@ $(document).ready(function(){
 			$('#unanswered').html('Unanswered:<br />' + this.numnoresponse);
 			var finalscore = Math.round((questions.length - this.numwrong - this.numnoresponse) / questions.length * 100);
 			$('#finalscore').html('Final Score:<br />' + finalscore + '%');
-			for (var i = 0; i < game.panelarray.length; i++) {
-				$(game.panelarray[i]).hide();
+			for (var i = 0; i < this.panelarray.length; i++) {
+				$(this.panelarray[i]).hide();
 			}
 			$('#description-text').html('<h2>Game Over!</h2><p>Here are your results.</p>');
 			$('#start').text('Play Again');
@@ -207,23 +206,24 @@ $(document).ready(function(){
 		},
 
 		shuffleAnswers: function(array){
-			var currentIndex = array.length, temporaryValue, randomIndex;
+			var currentIndex = array.length;
+			var temporaryValue;
+			var randomIndex;
 
-			while (0 !== currentIndex) {
+			while (0 !== currentIndex) { // while loop for length of array, backwards
 
-				randomIndex = Math.floor(Math.random() * currentIndex);
-				currentIndex -= 1;
+				randomIndex = Math.floor(Math.random() * currentIndex); // get a random number between 0 - current length of array left to randomize
+				currentIndex -= 1; // decrement after selecting number (puts back to 0-based index instead of length-based)
 
-				temporaryValue = array[currentIndex];
-				array[currentIndex] = array[randomIndex];
-				array[randomIndex] = temporaryValue;
+				temporaryValue = array[currentIndex]; // put the last item in the array into a holding variable
+				array[currentIndex] = array[randomIndex]; // put the randomized item into the last item in the current array
+				array[randomIndex] = temporaryValue; // replace with the former last item in the array
 			}
 
 			return array;
 		},
 
 		checkAnswer: function($objid){
-			console.log('qanswered is ' + this.qanswered);
 			if (this.qanswered) {
 				return ($objid.data('value') === questions[this.currentquestion][1]);
 			} else {
@@ -232,9 +232,7 @@ $(document).ready(function(){
 		},
 
 		displayQuestion: function(array, index){
-			console.log('array');
-			console.log(array);
-			console.log('index: ' + index);
+			
 			if (index < array.length) {
 				$('#timer-text').text('Time Remaining');
 				$('#timer-numbers').text(this.timerDefault);
@@ -255,24 +253,21 @@ $(document).ready(function(){
 				this.shuffleAnswers(answers);
 				$('#options').empty();
 				for (var j = 0; j < answers.length; j++) {
-					// buttons += '<button class="clickable">' + answers[j] + '</button>';
 					var $button = $('<button></button>', {id: 'button' + j, class: 'clickable', text: answers[j]});
 					$button.data('value', answers[j]);
 					$('#options').append($button).fadeIn();
 				}
 				this.startTimer();
 			} else if (index >= array.length) {
-				console.log('Game Over, display results');
 				this.gameOver();
 			}
 		},
 
 		revealAnswers: function($obj){
 			$obj.each(function(){
-				
-				
-				if ($(this).attr('id') != 'start'){
-					console.log('! -- $this',$(this), 'this', this);
+
+				if ($(this).attr('id') != 'start'){  // don't touch the start button
+
 					$(this).attr('disabled','disabled');
 					if($(this).data('value') === questions[game.currentquestion][1]) {
 						$(this).prepend(game.i_ansright);
@@ -286,8 +281,6 @@ $(document).ready(function(){
 		},
 
 		displayAnswer: function(correct,answered){
-			console.log('Displaying answer');
-			console.log('Checking current question number: ' + game.currentquestion);
 			if ((game.currentquestion+1) >= questions.length) {
 				$('#timer-text').text('Game Over! Results In');
 			} else {
@@ -295,7 +288,6 @@ $(document).ready(function(){
 			}
 			$('#timer-numbers').text(this.delayDefault);
 			this.phase = 'displaying';
-			console.log('Correct: ' + correct + ' | Answered: ' + answered);
 			if (answered) {
 				if (correct) {
 					this.playAudio(this.ding);
@@ -327,19 +319,17 @@ $(document).ready(function(){
 			
 		clickHandler: function(objid){
 			// Function - click handler
-			var gameobj = this;
 			var $objid = $(objid);
 			switch (this.phase) { // check game phase
 
 				case 'initial': // :initial
-					game.initializeGame();
-					gameobj.startTrivia();
-					gameobj.currentquestion = 0;
-					gameobj.displayQuestion(questions,gameobj.currentquestion);
+					this.initializeGame();
+					this.startTrivia();
+					this.currentquestion = 0;
+					this.displayQuestion(questions,this.currentquestion);
 					break; // end :initial
 
 				case 'quizzing': // :quizzing
-					console.log($objid.data());
 					this.stopTimer();
 					// if user guesses, set qanswered true
 					this.qanswered = true;
@@ -351,9 +341,8 @@ $(document).ready(function(){
 						this.numwrong++;
 					}
 					this.displayAnswer(answer,this.qanswered);
-					// at timeout, check guess (qanswered would be false)
-					// ad
 					break; //end :quizzing
+
 				case 'displaying': // displaying answer
 					// do nothing;
 					break;
@@ -368,14 +357,11 @@ $(document).ready(function(){
 	$(document).click(function(event){
 		$(event.target).closest('.clickable').each(function(){
 			var objid = '#' + this.id;
-			console.log(objid + ' clicked!');
-			console.log(objid + ' data value: ' + $(objid).data());
 			game.clickHandler(objid);
 		});
 	});
 
 	$('#mute').click(function(event){
-		console.log('mute clicked');
 		pauseAudio(bgm);
 		playing = !playing;
 	});
