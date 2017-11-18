@@ -212,7 +212,7 @@ $(document).ready(function(){
 
 			while (0 !== currentIndex) { // while loop for length of array, backwards
 
-				randomIndex = Math.floor(Math.random() * currentIndex); // get a random number between 0 - current length of array left to randomize
+				randomIndex = Math.floor(Math.random() * currentIndex); // get a random number between 0 - current length of array left to randomize, exclusive
 				currentIndex -= 1; // decrement after selecting number (puts back to 0-based index instead of length-based)
 
 				temporaryValue = array[currentIndex]; // put the last item in the array into a holding variable
