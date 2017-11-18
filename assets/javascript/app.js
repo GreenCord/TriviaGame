@@ -1,19 +1,21 @@
 // var bgm = new Audio('./assets/audio/dotspf.ogg');
 var bgm = new Audio('./assets/audio/christmas.ogg');
-var playing = false;
+var playing = true;
 bgm.addEventListener('ended', function(){
 	this.currentTime = 0;
 	this.play();
 }, false);
 
 $(document).ready(function(){
-	bgm.play();
+	// bgm.play();
 
 	function pauseAudio(audio){
 		if (!playing) {
 			audio.pause();
+			$('#mute').html('<i class="fa fa-play"></i>&nbsp;Play Music')
 		} else {
 			audio.play();
+			$('#mute').html('<i class="fa fa-pause"></i>&nbsp;Pause Music')
 		}
 	}
 // create trivia questions and answers array
